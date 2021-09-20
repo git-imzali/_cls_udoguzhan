@@ -1,18 +1,18 @@
 from django.db import models
 from autoslug import AutoSlugField
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
 from app.blog.models import KategoriModel
+from apaccount.models import CustomUserModel
 from ckeditor.fields import RichTextField
+from app.blog.abstract_models import DateAbstractModel
 
-class YazilarModel(models.Model):
+class YazilarModel(DateAbstractModel):
     baslik = models.CharField(max_length=100,blank=False,null=False)
     icerik = RichTextField()
     slug = AutoSlugField(populate_from='baslik',unique=True)
     resim =models.ImageField(upload_to='yazi_resimleri')
-    olusturulma_tarihi = models.DateTimeField(auto_now_add=True)
-    duzenlenme_tarihi = models.DateTimeField(auto_now=True)
     kategoriler = models.ManyToManyField(KategoriModel, related_name='kategoriyazilari')
-    yazar = models.ForeignKey(User, on_delete=models.CASCADE, related_name='yazarinyazilari')
+    yazar = models.ForeignKey(CustomUserModel, on_delete=models.CASCADE, related_name='yazarinyazilari')
 
     class Meta:
         db_table = 'yazi'

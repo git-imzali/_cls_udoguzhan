@@ -1,0 +1,13 @@
+link: udemy
+
+dekaratör, fieldsets:
+---------------------------------------------
+@admin.register(CustomUserModel)
+class CustomAdmin(UserAdmin):
+    list_display = ('username','email')
+    fieldsets = UserAdmin.fieldsets + (
+        ('Avatar Değiştirme alanı', {
+            'fields': ['avatar']
+        }),
+    )
+---------------------------------------------
