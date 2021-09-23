@@ -6,4 +6,5 @@ urlpatterns = [
     path('iletisim/', views.iletisim, name='iletisim'),
     path('kategori/<slug:kategoriSlug>/', views.kategori, name='kategori'),
     path('yazilarim/', views.yazilarim, name='yazilarim'),
+    path('detay/<slug:slug>/', views.detay, name='detay'),
 ]

@@ -1,13 +1,17 @@
 {% extends 'base.html'%}
+{% load crispy_forms_tags %}
 
 
-{% block title %} Anasayfa {% endblock title %}
+{% block title %} İletişim {% endblock title %}
 
 
 {% block content %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form | crispy }}
+        <input type="submit" class="btn btn-info" value="Gönder">
+    </form>
 
-<h1>İletişim</h1>
 
-<h2>Merhaba, {{ ulke }}</h2>
 
 {% endblock content %}

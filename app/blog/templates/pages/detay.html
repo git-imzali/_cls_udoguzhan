@@ -1,0 +1,49 @@
+{% extends 'base.html'%}
+{% load static %}
+
+{% block title %} {{yazi.baslik}} {% endblock title %}
+
+
+{% block content %}
+
+  <div class="card mb-3">
+    <div class="row no-gutters">
+      <div class="col-md-4">
+        <img src="{{yazi.resim.url}}" class="card-img img" alt="...">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title"><strong>{{yazi.baslik}}</strong></h5>
+          <p class="card-text">{{yazi.icerik|safe}}</p>
+          <p class="card-text"><small class="text-muted">
+            {{ yazi.duzenlenme_tarihi | timesince }} önce paylaşıldı.</small></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h5>Yorumlar</h5>
+
+{% for yorum in yorumlar %}
+  <div class="card">
+      <div class="card-body" style="display:flex;flex-direction: row;">
+          <div>
+              {% if yorum.yazar.avatar %}
+                <img src="{{yorum.yazar.avatar.url}}" class="rounded pt-4" width="75px" height="75px">
+              {% else %}
+              <img src="{% static 'img/no-avatar.jpg' %}" class="rounded pt-4" width="75px" height="75px">
+              {% endif %}
+          </div>
+          <div>
+              <h5 class="card-title">{{yorum.yazar.username}}</h5>
+              <p class="card-text">{{yorum.yorum}}</p>
+          </div>
+      </div>
+  </div>
+{% empty %}
+  <p>Bu yazı için henüz yorum yapılmamış.</p>
+{% endfor %}
+
+{% endblock content %}
+  
+  
